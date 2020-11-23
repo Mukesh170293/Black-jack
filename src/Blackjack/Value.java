@@ -1,5 +1,6 @@
 package Blackjack;
 
-public class Value {
-
+public enum Value {
+	TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING, ACE
 }
+
