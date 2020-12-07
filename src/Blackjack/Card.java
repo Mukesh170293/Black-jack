@@ -8,7 +8,7 @@ public class Card{
 		this.suit = suit;
 		this.symbol = symbol;
 	}
-	public String getSuit(){
+	public String toString(){
 		return this.suit.toString() + "  " + this.symbol.toString();
 	}
 	public Value getValue() {

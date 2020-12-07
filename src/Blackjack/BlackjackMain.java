@@ -10,7 +10,7 @@ public class BlackjackMain {
 		System.out.println("Please enter your name :");
 		Scanner scan = new Scanner(System.in);
 		String username = scan.nextLine();
-		System.out.println(username);
+		
 		
 		Deck play = new Deck();
 		play.createDeck();
@@ -40,8 +40,8 @@ public class BlackjackMain {
 			Dealer.draw(play);
 			
 			while(true) {
-				System.out.println("your cards in hand:"+ Player.toString());
-				System.out.println("Current value of your cards:"+play.cardsValue());
+				System.out.println("your cards in hand:"+ Player.toString().toString());
+				System.out.println("Current value of your cards:"+Player.cardsValue());
 				
 				System.out.println("Cards in Dealer Hand: " + Dealer.getCard(0).getValue() + " and Hidden cards");
 				System.out.println("Do you like to 1.Hit or 2.Stand");
@@ -56,13 +56,64 @@ public class BlackjackMain {
 						break;
 					}
 				}
+				
+				if(userresponse == 2){
+					break;
+					
+				}
+				
+				}
+			System.out.println("Uhide dealer cards:" + Dealer.toString());
+			
+			if((Dealer.cardsValue() > Player.cardsValue())&&endofround == false) {
+				System.out.println("Dealer Wins!!! He beats you  " + Dealer.cardsValue() + " to " + Player.cardsValue());
+				playeramount -= Bet;
+				endofround = true;
 			}
+			
+			while((Dealer.cardsValue() < 17) && endofround == false){
+				Dealer.draw(play);
+				System.out.println("Dealer draws following cards " + Dealer.getCard(Dealer.deckSize()-1).toString());
+			}
+			
+			System.out.println("Value of Dealer cards: " + Dealer.cardsValue());
+			
+			if((Dealer.cardsValue()>21)&& endofround == false){
+				System.out.println("Dealer Busts. You win!");
+				playeramount += Bet;
+				endofround = true;
+			}
+			
+			if((Dealer.cardsValue() == Player.cardsValue()) && endofround == false){
+				System.out.println("Push.");
+				endofround = true;
+			}
+			
+			if((Player.cardsValue() > Dealer.cardsValue()) && endofround == false){
+				System.out.println("ou have won the hand");
+				playeramount += Bet;
+				endofround = true;
+			}
+			else if(endofround == false) //dealer wins
+			{
+				System.out.println("Dealer wins.");
+				playeramount -= Bet;
+			}
+			
+			Player.moveAllToDeck(play);
+			Dealer.moveAllToDeck(play);
+			System.out.println("Its end of hand");
+		}
+		System.out.println(" You have lost your money: Game over!");
+		Input.close();
+		scan.close();
+		}		
 		}
 		
-		}
 		
 		
-	}
+		
+	
 	
 	
 
